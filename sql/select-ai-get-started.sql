@@ -3,14 +3,13 @@
 -- config.sql contains the endpoints, resource groups and other settings required to connect to your Azure OpenAI deployment
 @./config.sql
 
-ACCEPT azureOpenAIKey CHAR PROMPT 'Enter your Azure OpenAI Key: ' HIDE
-
 -- Create a credential that allows the user to access the Azure OpenAI endpoint
 BEGIN                                                                          
- dbms_cloud.create_credential(                                                 
-   credential_name => '&azureOpenAICredentialName',                                            
-   username => 'AZURE_OPENAI',                                                 
-   password => '&azureOpenAIKey');                            
+    dbms_cloud.create_credential (                                                 
+        credential_name => '&azureOpenAICredentialName',                                            
+        username => 'AZURE_OPENAI',                                                 
+        password => '&azureOpenAIKey'
+    );                            
 END;                                                                           
 /  
 
@@ -21,42 +20,42 @@ END;
   2. The object list contains the tables that will be the targets for natural language queries
 */
 
-begin
-  -- recreate the profile
-  dbms_cloud_ai.drop_profile(
-    profile_name => '&profileName',
-    force => true
+BEGIN
+    -- recreate the profile
+    dbms_cloud_ai.drop_profile (
+        profile_name => '&profileName',
+        force => true
     );
 
-  -- create an AI profile
-  dbms_cloud_ai.create_profile(
-    profile_name => '&profileName',
-    attributes =>       
-        '{"provider": "azure",        
-          "azure_resource_name": "&azureOpenAIResourceName",                    
-          "azure_deployment_name": "&azureOpenAIDeploymentName",
-          "credential_name": "&azureOpenAICredentialName",
-          "comments":"true",          
-          "object_list": [
-            {"owner": "&userName", "name": "GENRE"},
-            {"owner": "&userName", "name": "CUSTOMER"},
-            {"owner": "&userName", "name": "PIZZA_SHOP"},
-            {"owner": "&userName", "name": "STREAMS"},
-            {"owner": "&userName", "name": "MOVIES"},
-            {"owner": "&userName", "name": "ACTORS"}
-          ]          
-          }'
+    -- create an AI profile. 
+    dbms_cloud_ai.create_profile (
+        profile_name => '&profileName',
+        attributes =>       
+            '{"provider": "azure",        
+                "azure_resource_name": "&azureOpenAIResourceName",                    
+                "azure_deployment_name": "&azureOpenAIDeploymentName",
+                "credential_name": "&azureOpenAICredentialName",
+                "comments":"true",          
+                "object_list": [
+                {"owner": "&userName", "name": "GENRE"},
+                {"owner": "&userName", "name": "CUSTOMER"},
+                {"owner": "&userName", "name": "PIZZA_SHOP"},
+                {"owner": "&userName", "name": "STREAMS"},
+                {"owner": "&userName", "name": "MOVIES"},
+                {"owner": "&userName", "name": "ACTORS"}
+                ]          
+                }'
     );
-  end;
+    END;
   /
 
 
 -- Set that profile for this session
-begin
+BEGIN
   dbms_cloud_ai.set_profile(
         profile_name => '&profileName'
     );
-end;
+END;
 /
 
 /**
@@ -68,6 +67,7 @@ Notice how the SQL language has been extended with new AI keywords
 -- 4. showsql - SQL used to produce the result
 -- 5. explainsql - explains the query and its processing
 */
+
 -- simple chat
 select ai chat what happened to the new england patriots;
 
