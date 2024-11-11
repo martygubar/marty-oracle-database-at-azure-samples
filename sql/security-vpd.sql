@@ -1,3 +1,6 @@
+-- Copyright (c) 2024 Oracle and/or its affiliates.
+-- Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl/
+
 CREATE TABLE "MOVIESTREAM"."VGSALES" 
    (	"NAME" VARCHAR2(4000 BYTE) COLLATE "USING_NLS_COMP", 
 	"PLATFORM" VARCHAR2(4000 BYTE) COLLATE "USING_NLS_COMP", 

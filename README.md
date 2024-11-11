@@ -9,9 +9,19 @@ Oracle Database@Azure brings Oracle's best databases - Exadata and Autonomous Da
 * Quickly react to business demands using one converged, fully automated database that’s optimized for all workloads and data formats.
 
 ## Getting Started
+* Subscribe to Oracle Database@Azure
 * [Install the Azure CLI](https://learn.microsoft.com/en-us/cli/azure/)
-* [Deploy a new Oracle Autonomous Database using the Azure CLI](azure-cli/deploy-adb.md)
-* Get started with Select AI ([enable access](sql/select-ai-admin-enable.sql) | [samples](sql/select-ai-get-started.sql)) 
+* [Deploy a new Oracle Autonomous Database 
+    * Using the Azure Portal
+    * Using Terraform scripts
+    * [Using the Azure CLI](azure-cli/deploy-adb.md)
+* [Connect to Autonomous Database using VSCode](https://marketplace.visualstudio.com/items?itemName=Oracle.sql-developer)
+* Sample code
+    * Create a database user and add sample data
+    * Working with data in Azure Storage
+    * Get started with Select AI ([enable access](sql/select-ai-admin-enable.sql) | [samples](sql/select-ai-get-started.sql)) 
+    * Create JSON table collections and access using python / REST
+    * Run a spatial query, graph query
 
 <!--
 

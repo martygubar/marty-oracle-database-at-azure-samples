@@ -1,97 +1,20 @@
-/* Run this script as the Autonomous Database database user that will be access Azure OpenAI */
+-- Copyright (c) 2024 Oracle and/or its affiliates.
+-- Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl/
+
+/* Apply AI SQL function to your data to summarize information, make recommendations and more */
+
+/* PREREQUISITES
+    Install the sample schema using script
+        @data-create-sample-schema.sql
+*/
+
+-- Run this script as the Autonomous Database database user that will be access Azure OpenAI 
 
 -- config.sql contains the endpoints, resource groups and other settings required to connect to your Azure OpenAI deployment
-@./config.sql
+@config.sql
 
--- Create a credential that allows the user to access the Azure OpenAI endpoint
-BEGIN                                                                          
-    dbms_cloud.create_credential (                                                 
-        credential_name => '&azureOpenAICredentialName',                                            
-        username => 'AZURE_OPENAI',                                                 
-        password => '&azureOpenAIKey'
-    );                            
-END;                                                                           
-/  
-
-/*
-  A Select AI profile describes the LLM you will use plus information that will be used for natural language queries. You can create as many 
-  AI profiles as you need. You may want to try different models to see their effectiveness, expose profiles to different user groups, etc.:
-  1. For Azure OpenAI, a deployment was created that is using the gpt-4o model
-  2. The object list contains the tables that will be the targets for natural language queries
-*/
-
-BEGIN
-    -- recreate the profile
-    dbms_cloud_ai.drop_profile (
-        profile_name => '&profileName',
-        force => true
-    );
-
-    -- create an AI profile. 
-    dbms_cloud_ai.create_profile (
-        profile_name => '&profileName',
-        attributes =>       
-            '{"provider": "azure",        
-                "azure_resource_name": "&azureOpenAIResourceName",                    
-                "azure_deployment_name": "&azureOpenAIDeploymentName",
-                "credential_name": "&azureOpenAICredentialName",
-                "comments":"true",          
-                "object_list": [
-                {"owner": "&userName", "name": "GENRE"},
-                {"owner": "&userName", "name": "CUSTOMER"},
-                {"owner": "&userName", "name": "PIZZA_SHOP"},
-                {"owner": "&userName", "name": "STREAMS"},
-                {"owner": "&userName", "name": "MOVIES"},
-                {"owner": "&userName", "name": "ACTORS"}
-                ]          
-                }'
-    );
-    END;
-  /
-
-
--- Set that profile for this session
-BEGIN
-  dbms_cloud_ai.set_profile(
-        profile_name => '&profileName'
-    );
-END;
-/
-
-/**
-Start asking questions!
-Notice how the SQL language has been extended with new AI keywords
--- 1. chat    - general AI chat
--- 2. runsql  - [default] ask a question and get a structured result
--- 3. narrate - ask a question and get a conversational result
--- 4. showsql - SQL used to produce the result
--- 5. explainsql - explains the query and its processing
-*/
-
--- simple chat
-select ai chat what happened to the new england patriots;
-
--- use your data
-select ai what are our total views;
-select ai showsql what are our total views;
-
--- more sophisticated
-select ai what are our total streams broken out by genre;
-select ai explainsql what are our total streams broken out by genre;
-
-select ai what are total streams by movie for tom hanks movies;
-
-/**
-There are also api's for using Select AI
-*/
--- Ask another simple question
-SELECT 
-    DBMS_CLOUD_AI.GENERATE(
-        PROMPT => 'What is Tom Hanks best known for',
-        PROFILE_NAME => '&profileName',
-        ACTION       => 'chat'                     
-    ) AS response
-FROM dual; 
+-- Create your credential and Select AI Profile
+@select-ai-create-profile.sql
 
 /**
  what's great is you can now easily apply AI to your organization's data with a simple query
@@ -112,7 +35,7 @@ SELECT JSON_OBJECT(
         support_chat) AS prompt_details
 FROM v_customer_support WHERE support_chat_id = 1;
 
--- now apply GenAI in a query to get teh answer
+-- now apply GenAI in a query to get the answer
 WITH prompt_document AS (
     -- this json document
     SELECT JSON_OBJECT(
@@ -123,7 +46,7 @@ WITH prompt_document AS (
 SELECT 
     DBMS_CLOUD_AI.GENERATE(
         PROMPT => prompt_details,
-        PROFILE_NAME => '&profileName',
+        PROFILE_NAME => '&AZURE_OPENAI_PROFILE_NAME',
         ACTION       => 'chat'                     
     ) AS response
 FROM prompt_document;       
@@ -201,10 +124,7 @@ SELECT
                   '2. Use lots of fun emojis in the response. ' ||
                   '3. Finish the email thanking them for being a customer and sign it "From The MovieStream Team" \n' 
                   || doc,
-        profile_name => '&profileName',
+        profile_name => '&AZURE_OPENAI_PROFILE_NAME',
         action => 'chat'
     ) AS email_promotion
 FROM dataset;
-
-
-
