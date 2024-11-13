@@ -3,7 +3,8 @@
 
 set -e
 
-./deploy-resource-group.sh
-./deploy-network.sh
-#./deploy-compute-vm.sh
-#./deploy-adb.sh
+./create-resource-group.sh
+./create-network.sh
+./create-compute-vm.sh
+./create-adb.sh
+./create-data-lake-storage.sh

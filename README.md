@@ -10,18 +10,22 @@ Oracle Database@Azure brings Oracle's best databases - Exadata and Autonomous Da
 
 ## Getting Started
 * Subscribe to Oracle Database@Azure
-* [Install the Azure CLI](https://learn.microsoft.com/en-us/cli/azure/)
-* [Deploy a new Oracle Autonomous Database 
-    * Using the Azure Portal
-    * Using Terraform scripts
+* Deploy a new Oracle Autonomous Database 
+    * [Using the Azure Portal](https://youtu.be/QOCvRr5CfeQ)
+    * [Using Terraform scripts](https://github.com/oci-landing-zones/terraform-oci-multicloud-azure/tree/main)
     * [Using the Azure CLI](azure-cli/deploy-adb.md)
-* [Connect to Autonomous Database using VSCode](https://marketplace.visualstudio.com/items?itemName=Oracle.sql-developer)
+* Connect to your Autonomous Database
+    * [Connection options in the documentation](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/connect-preparing.html)
+    * Use these great VS Code extensions that help you develop and debug your database apps
+        * SQL Developer for VS Code ([Learn More](https://www.oracle.com/database/sqldeveloper/vscode/) | [Marketplace](https://marketplace.visualstudio.com/items?itemName=Oracle.sql-developer))
+        * Oracle Developer Tools for VS Code  ([Learn More](https://docs.oracle.com/en/database/oracle/developer-tools-for-vscode/getting-started/gettingstarted.html) | [Marketplace](https://marketplace.visualstudio.com/items?itemName=Oracle.oracledevtools))
 * Sample code
     * Create a database user and add sample data
-    * Working with data in Azure Storage
+    * Work with data in Azure Storage
     * Get started with Select AI ([enable access](sql/select-ai-admin-enable.sql) | [samples](sql/select-ai-get-started.sql)) 
     * Create JSON table collections and access using python / REST
     * Run a spatial query, graph query
+    * .... and more
 
 <!--
 
