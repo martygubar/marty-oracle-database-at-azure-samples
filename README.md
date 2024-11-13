@@ -9,13 +9,13 @@ Oracle Database@Azure brings Oracle's best databases - Exadata and Autonomous Da
 * Quickly react to business demands using one converged, fully automated database that’s optimized for all workloads and data formats.
 
 ## Getting Started
-* Subscribe to Oracle Database@Azure
+* [Subscribe to Oracle Database@Azure](https://www.youtube.com/watch?v=MEB8kB_TI2I)
 * Deploy a new Oracle Autonomous Database 
     * [Using the Azure Portal](https://youtu.be/QOCvRr5CfeQ)
     * [Using Terraform scripts](https://github.com/oci-landing-zones/terraform-oci-multicloud-azure/tree/main)
     * [Using the Azure CLI](azure-cli/create-adb.md)
 * Connect to your Autonomous Database
-    * [Connection options in the documentation](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/connect-preparing.html)
+    * [Learn about connectivity options](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/connect-preparing.html)
     * Use these great VS Code extensions that help you develop and debug your database apps
         * SQL Developer for VS Code ([Learn More](https://www.oracle.com/database/sqldeveloper/vscode/) | [Marketplace](https://marketplace.visualstudio.com/items?itemName=Oracle.sql-developer))
         * Oracle Developer Tools for VS Code  ([Learn More](https://docs.oracle.com/en/database/oracle/developer-tools-for-vscode/getting-started/gettingstarted.html) | [Marketplace](https://marketplace.visualstudio.com/items?itemName=Oracle.oracledevtools))
