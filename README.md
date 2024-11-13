@@ -13,7 +13,7 @@ Oracle Database@Azure brings Oracle's best databases - Exadata and Autonomous Da
 * Deploy a new Oracle Autonomous Database 
     * [Using the Azure Portal](https://youtu.be/QOCvRr5CfeQ)
     * [Using Terraform scripts](https://github.com/oci-landing-zones/terraform-oci-multicloud-azure/tree/main)
-    * [Using the Azure CLI](azure-cli/deploy-adb.md)
+    * [Using the Azure CLI](azure-cli/create-adb.md)
 * Connect to your Autonomous Database
     * [Connection options in the documentation](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/connect-preparing.html)
     * Use these great VS Code extensions that help you develop and debug your database apps
