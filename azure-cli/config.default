@@ -22,7 +22,7 @@ NSG_NAME=$SUBNET2_NAME-nsg
 
 ## COMPUTE VM
 VM_NAME="adb-vm-client"
-VM_PREFERRED_SIZES=( "Standard_GS1" "Standard_DC1s_v2" "Standard_DC2s_v2" "Standard_DC2ads_v5" "Standard_L4s"  )
+VM_PREFERRED_SIZES=( "Standard_DS3_v2" "Standard_DC1s_v2" "Standard_DC2s_v2" "Standard_DC2ads_v5" "Standard_L4s"  )
 VM_IMAGE="MicrosoftWindowsDesktop:Windows-11:win11-22h2-pro:latest"
 
 ## CLOUD STORAGE

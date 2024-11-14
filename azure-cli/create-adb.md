@@ -3,7 +3,7 @@ The steps below show how to create an Autonomous Database using the Azure CLI.
 
 Prerequisites:
 * [Install the Azure CLI](https://learn.microsoft.com/en-us/cli/azure/) 
-* Subscribe to Oracle Database@Azure. 
+* [Subscribe to Oracle Database@Azure](https://www.youtube.com/watch?v=MEB8kB_TI2I) 
 * Ensure you have the appropriate user groups and privileges. See [details for onboarding Autonomous Database](https://learn.microsoft.com/en-us/azure/oracle/oracle-db/onboard-oracle-database)
 
 ## Deploy your Autonomous Database
@@ -48,17 +48,37 @@ chmod 600 config
 |USER_PASSWORD|The password for both the VM and the Autonomous Database admin user|"Welcome1234#abcd"|
 
 ### Using the scripts
-After updating the config file: 
+Log into azure: after updating the config file:
 
-Log into azure:
 ```bash
 az login 
 ```
-Then, run your scripts. The following will deploy a complete environment:
-After a few minutes, review your newly created database:
+Then, run your scripts. The following will deploy a complete environment, but you can also install independent components. Just make sure you install dependencies (e.g. a VCN prior to Autonomous Database):
+
+Creating all of the resources will take approximately 15-20 minutes.
+
 ```bash
 ./create-all-resources.sh
 ```
+
+Check for errors after running the script. For example, VM availability can impact the success of creating the resource. If there is an issue, simply rerun the script that creates the resource (note: you may need to update the config file).
+
+## What's next
+Connect to your Autonomous Database!
+* [Learn about connectivity options](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/connect-preparing.html)
+* Use these great VS Code extensions that help you develop and debug your database apps:
+    * SQL Developer for VS Code ([Learn More](https://www.oracle.com/database/sqldeveloper/vscode/) | [Marketplace](https://marketplace.visualstudio.com/items?itemName=Oracle.sql-developer))
+    * Oracle Developer Tools for VS Code  ([Learn More](https://docs.oracle.com/en/database/oracle/developer-tools-for-vscode/getting-started/gettingstarted.html) | [Marketplace](https://marketplace.visualstudio.com/items?itemName=Oracle.oracledevtools)) 
+
+#### JDBC Example:
+JDBC is a common way to connect to Autonomous Database. For example, you can use the **Custom JDBC URL** in the VS Code SQL Developer Extension:
+    ![connection dialog](images/connect-dialog.png)
+
+Notice the `jdbc:oracle:thin:@` prefix followed by a connection string. You can find the connection string in different ways. 
+
+1. Go to your Autonomous Database blade in the Azure Portal and go to **Settings -> Connections**:
+    ![Azure Portal connections](images/connections-portal.png)
+2. Use the Azure cli script [`show-adb-info.sh`](./show-adb-info.sh). That script will return information about your Autonomous Database, including connection details.
 
 <hr>
 Copyright (c) 2024 Oracle and/or its affiliates.<br>

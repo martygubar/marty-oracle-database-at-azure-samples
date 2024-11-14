@@ -14,3 +14,10 @@ az oracle-database autonomous-database show \
     --name $ADB_NAME \
     --resource-group $RESOURCE_GROUP \
     --query "connectionStrings.profiles[?consumerGroup=='Medium'] | [0]"
+
+echo "JDBC Connection string:"
+CONN_STR=`az oracle-database autonomous-database show --name $ADB_NAME --resource-group $RESOURCE_GROUP --query "connectionStrings.profiles[?consumerGroup=='Medium'] | [0].value"`
+CONN_STR=${CONN_STR#?}  # Remove first character
+CONN_STR=${CONN_STR%?}  # Remove last character
+CONN_STR=jdbc:oracle:thin:@$CONN_STR
+echo $CONN_STR

@@ -5,6 +5,7 @@
 
 -- Connect string
 -- get the connection string by running ../azure-cli/show-adb-info.sh
+-- Example: jdbc:oracle:thin:@(description= ...)
 define CONN='your-database-connection-string'  
 -- the database user that will own the sample schema
 define USER_NAME='moviestream' 

@@ -5,6 +5,6 @@ set -e
 
 ./create-resource-group.sh
 ./create-network.sh
-./create-compute-vm.sh
 ./create-adb.sh
 ./create-data-lake-storage.sh
+./create-compute-vm.sh

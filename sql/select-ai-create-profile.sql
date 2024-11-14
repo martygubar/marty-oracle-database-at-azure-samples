@@ -13,19 +13,25 @@
 DECLARE
     l_exists number := 0;
 BEGIN
-    -- Create your credential if it does not already exist
+    -- Create your credential. Replace it if already exists
     select COUNT(*)
     into l_exists
     from user_credentials    
     where upper(credential_name)=upper('&AZURE_OPENAI_CREDENTIAL_NAME');
 
-    IF l_exists = 0 THEN
-        dbms_cloud.create_credential (                                                 
-            credential_name => '&AZURE_OPENAI_CREDENTIAL_NAME',                                            
-            username => 'AZURE_OPENAI',                                                 
-            password => '&AZURE_OPENAI_KEY'
+    IF l_exists = 1 THEN
+        dbms_cloud.drop_credential (
+            credential_name => '&AZURE_OPENAI_CREDENTIAL_NAME'
         );
-    END IF;                            
+    END IF;
+
+    
+    dbms_cloud.create_credential (                                                 
+        credential_name => '&AZURE_OPENAI_CREDENTIAL_NAME',                                            
+        username => 'AZURE_OPENAI',                                                 
+        password => '&AZURE_OPENAI_KEY'
+    );
+
 END;                                                                           
 /  
 
